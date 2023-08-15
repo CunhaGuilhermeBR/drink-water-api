@@ -8,10 +8,12 @@ from datetime import datetime, date
 def save_entrys(user_id):
     try:
         user = User.objects.get(pk=user_id)  
-       
         entry = DailyEntry.objects.create(user=user, daily_quantity=quantity)
         if entry.daily_quantity >= user.daily_goal:
             entry.achieve_goal = True
+            entry.reimaning_quantity = 0
+        else:
+            entry.remaining_quantity = user.daily_goal - entry.daily_quantity
         entry_data = DailyEntry.objects.filter(id=entry.id).values() 
         return JsonResponse({"message": "Entry created successfully", "entry": list(entry_data)})
      
@@ -33,7 +35,10 @@ def drink_water(request):
             
             if entry.daily_quantity >= user.daily_goal:
                 entry.achieve_goal = True
-            
+                entry.remaining_quantity = 0
+            else:
+                entry.remaining_quantity = user.daily_goal - entry.daily_quantity
+
             entry.save()
 
             return JsonResponse({"message": "Daily quantity and goal updated successfully"})

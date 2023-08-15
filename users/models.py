@@ -11,3 +11,4 @@ class DailyEntry(models.Model):
     daily_quantity = models.FloatField(default=0)
     date = models.DateField(default=date.today)
     achieve_goal = models.BooleanField(default=False)
+    remaining_quantity = models.FloatField()
