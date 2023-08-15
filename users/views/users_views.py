@@ -29,7 +29,7 @@ def read(request):
             "name": user.name,
             "weight": user.weight,
             "daily_goal": user.daily_goal,
-            "entries": list(user.dailyentry_set.values('id', 'daily_quantity', 'date', 'achieve_goal'))
+            "entries": list(user.dailyentry_set.values('id', 'daily_quantity', 'date', 'achieve_goal', 'remaining_quantity'))
         }
         users_data.append(user_data)
 

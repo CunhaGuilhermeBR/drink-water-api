@@ -25,3 +25,10 @@ Para rodar basta ir a pasta de origem do projeto e rodar o comando
 2. Criação de rotinas.</br>
     2.1. Motivo: Não tive conhecimento o bastante e nas minhas pesquisas não encontrei como fazer, apenas dava erro e então decidi pela solução de criar a instância do dia quando o usuário adiciona e não encontra, então ele consegue fazer o controle.</br>
     2.2. Impacto: Na minha concepção uma rotina de criação de uma instância para cada usuário é uma solução mais "elegante" e que atende melhor os requisitos.</br>
+
+
+### Links
+
+Rodando a aplicação no Insonmia: https://drive.google.com/file/d/1uEEYq25ltkwKXogyWhLz3t5mUwa-HnXv/view?usp=sharing
+
+Arquitetura e decisões técnicas: https://drive.google.com/file/d/1cG-kHZ9M6jjOK6vUD5qQVzmfiHz2lUpY/view?usp=sharing

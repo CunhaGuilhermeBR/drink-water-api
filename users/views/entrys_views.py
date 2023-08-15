@@ -5,20 +5,23 @@ from django.forms.models import model_to_dict
 import json
 from datetime import datetime, date
 
-def save_entrys(user_id):
+def save_entrys(user_id, quantity):
     try:
         user = User.objects.get(pk=user_id)  
         entry = DailyEntry.objects.create(user=user, daily_quantity=quantity)
+        entry.remaining_quantity = max(0, user.daily_goal - entry.daily_quantity)
+        
         if entry.daily_quantity >= user.daily_goal:
             entry.achieve_goal = True
-            entry.reimaning_quantity = 0
-        else:
-            entry.remaining_quantity = user.daily_goal - entry.daily_quantity
-        entry_data = DailyEntry.objects.filter(id=entry.id).values() 
-        return JsonResponse({"message": "Entry created successfully", "entry": list(entry_data)})
+            entry.remaining_quantity = 0
+        
+        entry.save()
+        entry_data = model_to_dict(entry)
+        return JsonResponse({"message": "Entry created successfully", "entry": entry_data})
      
     except Exception as e:
         return JsonResponse({"error": str(e)})
+
 
 def drink_water(request):
     data = json.loads(request.body.decode("utf-8"))
